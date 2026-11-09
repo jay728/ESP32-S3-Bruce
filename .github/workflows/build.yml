@@ -26,23 +26,22 @@ jobs:
           python -m pip install --upgrade pip
           pip install platformio
 
-      
       - name: Build Smoochiee Board Firmware
-  run: |
-    for attempt in 1 2 3 4; do
-      echo "Build attempt $attempt of 4"
+        run: |
+          for attempt in 1 2 3 4; do
+            echo "Build attempt $attempt of 4"
 
-      if pio run -e smoochiee-board; then
-        echo "Build successful!"
-        exit 0
-      fi
+            if pio run -e smoochiee-board; then
+              echo "Build successful!"
+              exit 0
+            fi
 
-      echo "Build failed. Retrying in 20 seconds..."
-      sleep 20
-    done
+            echo "Build failed. Retrying in 20 seconds..."
+            sleep 20
+          done
 
-    echo "Build failed after 4 attempts."
-    exit 1
+          echo "Build failed after 4 attempts."
+          exit 1
 
       - name: Upload Firmware Binaries
         uses: actions/upload-artifact@v4
